@@ -20,7 +20,7 @@ function showResults(values) {
   window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
 }
 
-let renderEmailField = ({input, label, type, meta: {touched, error}}) =>
+let EmailInput = ({input, label, type, meta: {touched, error}}) =>
   <div>
     <label>{label}</label>
     <div>
@@ -29,7 +29,7 @@ let renderEmailField = ({input, label, type, meta: {touched, error}}) =>
     </div>
   </div>
 
-let renderEmails = ({fields, meta: {submitFailed, error}}) =>
+let EmailFields = ({fields, meta: {submitFailed, error}}) =>
   <ul>
     <li>
       <button type="button" onClick={() => fields.push()}>Add Email</button>
@@ -43,7 +43,7 @@ let renderEmails = ({fields, meta: {submitFailed, error}}) =>
         />}
         <Field
           name={email}
-          component={renderEmailField}
+          component={EmailInput}
           label={`Email #${index + 1}`}
         />
       </li>
@@ -53,7 +53,7 @@ let renderEmails = ({fields, meta: {submitFailed, error}}) =>
 
 let EmailsForm = ({handleSubmit, pristine, reset, submitting}) =>
   <form onSubmit={handleSubmit}>
-    <FieldArray name="emails" component={renderEmails} />
+    <FieldArray name="emails" component={EmailFields}/>
     <div>
       <button type="submit" disabled={submitting}>Submit</button>
       <button type="button" disabled={pristine || submitting} onClick={reset}>
